@@ -3,6 +3,16 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
+# Function to calculate dividend growth percentage year-over-year
+def calculate_dividend_growth(dividends):
+    # Group by year and sum the dividends for each year
+    annual_dividends = dividends.groupby(dividends.index.year).sum()
+    
+    # Calculate year-over-year growth in dividends as percentage change
+    dividend_growth = annual_dividends.pct_change() * 100  # pct_change calculates the percentage change between years
+    return dividend_growth
+
+
 # Function to calculate adjusted prices and normalize
 def calculate_adjusted_prices(data, dividends):
     dividends = dividends.reindex(data.index).fillna(0)
