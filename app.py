@@ -55,7 +55,7 @@ def fetch_and_process_data(tickers, start_date, index_names):
     annual_yields = {}
     for i, ticker in enumerate(tickers):
         stock = yf.Ticker(ticker)
-        data = stock.history(start=start_date)
+        data = stock.history(start=start_date,auto_adjust=False, actions=False)
         dividends = stock.dividends.loc[start_date:]
 
         if data.empty:
